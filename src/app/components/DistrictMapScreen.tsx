@@ -1,104 +1,181 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import districtMap from "../../imports/parkmuseerne.png";
-import { HamburgerIcon } from "./HamburgerIcon";
-import parkLogo from "../../imports/Parkmuseerne/c558da41746efd85c313bcad2c6f96deba71a7c7.png";
 
-const NAV_LINKS = [
-  "Explore the area", "Museums", "Parks & Gardens",
-  "Køb billet", "Events", "About Parkmuseerne", "Contact",
-];
+const districtMap = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/ad518c9bc1f134e0c56a7bd2d9e600fe66ecde02.png", import.meta.url).href;
+const parkLogo = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/c558da41746efd85c313bcad2c6f96deba71a7c7.png", import.meta.url).href;
+const hirschsprungImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/thehirschsprungcollection.jpg", import.meta.url).href;
+const smkImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/smk.jpg", import.meta.url).href;
+const naturalHistoryImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/naturalhistorymuseum.webp", import.meta.url).href;
+const rosenborgImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/rosenborgcastle.JPG", import.meta.url).href;
+const workersMuseumImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/workersmuseum.jpg", import.meta.url).href;
+const davidCollectionImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/davidcollection.jpg", import.meta.url).href;
+
+const FONT = "'Source Serif 4', serif";
+const HEADING_FONT = "'Montagu Slab', serif";
+
+const NAV_LINKS = ["Explore the area", "Museums", "Parks & Gardens", "Køb billet", "Events", "About Parkmuseerne", "Contact"];
 
 export interface Museum {
   id: number;
   name: string;
   subtitle: string;
   image: string;
-  top: string;
-  left: string;
+  // Figma pixel positions within the 390×312px map container
+  mapLeft: number;
+  mapTop: number;
 }
 
 export const MUSEUMS: Museum[] = [
   {
     id: 1,
-    name: "SMK – Statens Museum for Kunst",
-    subtitle: "Denmark's largest art museum with over 700 years of art history.",
-    image: "https://images.unsplash.com/photo-1551966775-a4ddc8df052b?w=600&h=300&fit=crop&auto=format",
-    top: "10%", left: "48%",
+    name: "The Hirschsprung Collection",
+    subtitle: "Intimate museum of 19th-century Danish Golden Age paintings.",
+    image: hirschsprungImage,
+    mapLeft: 120.61,
+    mapTop: 16.29,
   },
   {
     id: 2,
-    name: "The Palm House",
-    subtitle: "A Victorian greenhouse home to exotic tropical plants.",
-    image: "https://images.unsplash.com/photo-1580735284991-ea9028fa53a1?w=600&h=300&fit=crop&auto=format",
-    top: "38%", left: "17%",
+    name: "SMK – National Gallery of Denmark",
+    subtitle: "Denmark's largest art museum with over 700 years of art history.",
+    image: smkImage,
+    mapLeft: 167.61,
+    mapTop: 77.29,
   },
   {
     id: 3,
-    name: "Natural History Museum",
+    name: "National History Museum Denmark",
     subtitle: "Explore Earth's natural history from dinosaurs to deep-sea life.",
-    image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=600&h=300&fit=crop&auto=format",
-    top: "44%", left: "38%",
+    image: naturalHistoryImage,
+    mapLeft: 123.61,
+    mapTop: 145.29,
   },
   {
     id: 4,
     name: "Rosenborg Castle",
     subtitle: "A 17th-century royal castle set in the beautiful King's Garden.",
-    image: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=600&h=300&fit=crop&auto=format",
-    top: "57%", left: "52%",
+    image: rosenborgImage,
+    mapLeft: 205.61,
+    mapTop: 181.29,
   },
   {
     id: 5,
-    name: "Arbejdermuseet",
-    subtitle: "The Workers Museum documenting Danish working-class life since 1650.",
-    image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&h=300&fit=crop&auto=format",
-    top: "58%", left: "11%",
+    name: "The Workers Museum",
+    subtitle: "Documenting Danish working-class history and everyday life since 1650.",
+    image: workersMuseumImage,
+    mapLeft: 6.61,
+    mapTop: 157.29,
   },
   {
     id: 6,
-    name: "Davids Samling",
+    name: "The David Collection",
     subtitle: "One of Europe's finest collections of Islamic and decorative arts.",
-    image: "https://images.unsplash.com/photo-1566127992631-137a642a90f4?w=600&h=300&fit=crop&auto=format",
-    top: "62%", left: "80%",
+    image: davidCollectionImage,
+    mapLeft: 324.61,
+    mapTop: 225.29,
+  },
+  {
+    id: 7,
+    name: "Kongens Have",
+    subtitle: "Copenhagen's oldest royal park, surrounding Rosenborg Castle.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=300&fit=crop&auto=format",
+    mapLeft: 194.61,
+    mapTop: 253.29,
+  },
+  {
+    id: 8,
+    name: "Botanisk Have",
+    subtitle: "The Botanical Garden, home to over 13,000 plant species.",
+    image: "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=600&h=300&fit=crop&auto=format",
+    mapLeft: 111.61,
+    mapTop: 181.29,
+  },
+  {
+    id: 9,
+    name: "Østre Anlæg",
+    subtitle: "A peaceful Victorian landscaped park next to SMK.",
+    image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&h=300&fit=crop&auto=format",
+    mapLeft: 225.61,
+    mapTop: 109.29,
   },
 ];
 
-const CAFES = [
-  { top: "42%", left: "43%" },
-  { top: "14%", left: "54%" },
-  { top: "60%", left: "47%" },
-];
+const MUSEUMS_LIST = MUSEUMS.filter((m) => m.id <= 6);
+const PARKS_LIST = MUSEUMS.filter((m) => m.id >= 7);
 
-const WCS = [
-  { top: "50%", left: "22%" },
-  { top: "20%", left: "66%" },
-  { top: "68%", left: "58%" },
-];
-
-type FilterKey = "museums" | "cafes" | "wc";
+type FilterKey = "museums" | "parks" | "bikes" | "handicap" | "cafes";
 
 interface Props {
   onBack: () => void;
   onPinClick: (museum: Museum) => void;
 }
 
+function LanguageSelector() {
+  return (
+    <p className="tracking-[0.275px] whitespace-nowrap" style={{ fontFamily: FONT, fontSize: 11, color: "rgba(0,0,0,0.5)" }}>
+      <span style={{ fontSize: 11, lineHeight: "16.5px" }}>DA</span>
+      <span style={{ fontSize: 11, lineHeight: "16.5px", color: "rgba(0,0,0,0.3)" }}>|</span>
+      <span style={{ fontSize: 11, lineHeight: "16.5px", color: "#000", fontWeight: 700 }}>EN</span>
+    </p>
+  );
+}
+
+function HamburgerMenuIcon() {
+  return (
+    <div className="flex flex-col gap-[5px]" style={{ width: 28 }}>
+      <div className="bg-[#58744a] rounded-[6px]" style={{ height: 2.994, width: 18.198 }} />
+      <div className="bg-[#58744a] rounded-[6px]" style={{ height: 2.994, width: 28 }} />
+      <div className="bg-[#58744a] rounded-[6px]" style={{ height: 2.994, width: 11.752 }} />
+    </div>
+  );
+}
+
+function GreenPin({ num }: { num: number }) {
+  return (
+    <div
+      className="bg-[#58744a] relative rounded-full shrink-0"
+      style={{
+        width: 32,
+        height: 32,
+        boxShadow: "0px 10px 7.5px rgba(0,0,0,0.1), 0px 4px 3px rgba(0,0,0,0.1)",
+      }}
+    >
+      <div className="absolute inset-0 rounded-full pointer-events-none" style={{ border: "2.728px solid white" }} />
+      <div className="flex items-center justify-center size-full">
+        <span className="text-white text-center" style={{ fontFamily: FONT, fontSize: 11, fontWeight: 700 }}>
+          {num}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function SmallGreenPin({ num }: { num: number }) {
+  return (
+    <div className="bg-[#58744a] relative rounded-full shrink-0" style={{ width: 28, height: 28, flexShrink: 0 }}>
+      <div className="absolute inset-0 rounded-full pointer-events-none" style={{ border: "2.728px solid white", boxShadow: "0px 0px 0px 0px #58744a, 0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)" }} />
+      <div className="flex items-center justify-center size-full">
+        <span className="text-white text-center" style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700 }}>
+          {num}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function DistrictMapScreen({ onBack, onPinClick }: Props) {
   const [activeFilter, setActiveFilter] = useState<FilterKey | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggle = (key: FilterKey) =>
-    setActiveFilter((prev) => (prev === key ? null : key));
+  const toggle = (key: FilterKey) => setActiveFilter((prev) => (prev === key ? null : key));
 
-  const pillClass = (key: FilterKey) =>
-    `flex items-center gap-1.5 px-3 py-1.5 border rounded-full text-xs font-medium transition-colors whitespace-nowrap cursor-pointer ${
-      activeFilter === key
-        ? "bg-[#E9672B] border-[#E9672B] text-white"
-        : "bg-[#FCF5EC] border-black/25 text-black"
-    }`;
+  const showMuseumPins = activeFilter !== "parks";
+  const showParkPins = activeFilter !== "museums";
+
+  const pillStyle = (key: FilterKey): Record<string, string> => (activeFilter === key ? { background: "#E9672B", border: "0.682px solid #E9672B", color: "#fff", borderRadius: "9999px" } : { background: "#fcf5ec", border: "0.682px solid rgba(0,0,0,0.25)", color: "#000", borderRadius: "9999px" });
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FCF5EC] relative">
-
+    <div className="flex flex-col min-h-screen bg-[#fcf5ec] relative">
       {/* Slide-in menu */}
       {menuOpen && (
         <div className="absolute inset-0 z-50 flex">
@@ -112,159 +189,164 @@ export function DistrictMapScreen({ onBack, onPinClick }: Props) {
             </div>
             <nav className="flex flex-col flex-1 px-5 pt-6 gap-1">
               {NAV_LINKS.map((link) => (
-                <button
-                  key={link}
-                  onClick={() => setMenuOpen(false)}
-                  className={`text-left py-3 border-b border-[#58744A]/10 font-medium text-[15px] hover:text-[#58744A] ${
-                    link === "Køb billet" ? "text-[#E9672B] font-semibold" : "text-black"
-                  }`}
-                  style={{ fontFamily: "'Inter', sans-serif" }}
-                >
+                <button key={link} onClick={() => setMenuOpen(false)} className={`text-left py-3 border-b border-[#58744A]/10 text-[15px] hover:text-[#58744A] ${link === "Køb billet" ? "text-[#E9672B] font-semibold" : "text-black font-medium"}`} style={{ fontFamily: FONT }}>
                   {link}
                 </button>
               ))}
             </nav>
             <div className="px-5 py-6">
-              <p className="text-xs text-[#58744A]/60" style={{ fontFamily: "'Inter', sans-serif" }}>© 2024 Parkmuseerne</p>
+              <p className="text-xs text-[#58744A]/60" style={{ fontFamily: FONT }}>
+                © 2024 Parkmuseerne
+              </p>
             </div>
           </div>
         </div>
       )}
 
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-3 bg-[#FCF5EC] flex-shrink-0 border-b border-black/8 sticky top-0 z-10">
-        <button onClick={onBack} className="p-1">
-          <img src={parkLogo} alt="Parkmuseerne" className="h-10 w-auto object-contain" />
-        </button>
-        <div className="flex items-center gap-3">
-          <button
-            className="bg-[#E9672B] text-white px-4 py-2 text-sm font-medium whitespace-nowrap"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            Køb billet
+      <div className="bg-[#fcf5ec] relative shrink-0 w-full" style={{ borderBottom: "0.682px solid rgba(0,0,0,0.08)" }}>
+        <div className="flex items-center justify-between px-4" style={{ paddingTop: 12, paddingBottom: 12.682 }}>
+          {/* Logo */}
+          <button onClick={onBack} className="p-1">
+            <div style={{ height: 39.997, width: 54.636, position: "relative" }}>
+              <img alt="Parkmuseerne" className="absolute inset-0 max-w-none object-contain pointer-events-none size-full" src={parkLogo} />
+            </div>
           </button>
-          <button className="p-1" aria-label="Menu" onClick={() => setMenuOpen(true)}>
-            <HamburgerIcon />
-          </button>
-        </div>
-      </header>
-
-      {/* Filter pill row */}
-      <div className="flex gap-2 px-4 py-3 overflow-x-auto flex-shrink-0 border-b border-black/5">
-        <button className={pillClass("museums")} onClick={() => toggle("museums")}
-          style={{ fontFamily: "'Inter', sans-serif" }}>
-          🏛️ Museums
-        </button>
-        <button className={pillClass("cafes")} onClick={() => toggle("cafes")}
-          style={{ fontFamily: "'Inter', sans-serif" }}>
-          ☕ Caféer
-        </button>
-        <button className={pillClass("wc")} onClick={() => toggle("wc")}
-          style={{ fontFamily: "'Inter', sans-serif" }}>
-          🚻 WC
-        </button>
-      </div>
-
-      {/* Map — aspect-ratio locked so full illustration shows */}
-      <div className="w-full relative" style={{ aspectRatio: "5/4" }}>
-        <img
-          src={districtMap}
-          alt="Parkmuseerne district map"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-
-        {/* Pulsing "You are here" blue dot */}
-        <div
-          className="absolute"
-          style={{ top: "62%", left: "54%", transform: "translate(-50%, -50%)" }}
-        >
-          <span className="relative flex h-5 w-5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-5 w-5 bg-blue-500 border-2 border-white shadow-md" />
-          </span>
-          <div
-            className="absolute -top-7 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-[9px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap shadow"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            You are here
+          {/* Right side: Buy ticket + DA|EN + hamburger */}
+          <div className="flex items-center gap-3">
+            <div className="bg-[#e9672b]" style={{ height: 42, width: 114, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span className="text-white text-center" style={{ fontFamily: FONT, fontSize: 14, fontWeight: 600, letterSpacing: "0.4px", lineHeight: "24px" }}>
+                Buy ticket
+              </span>
+            </div>
+            <LanguageSelector />
+            <button className="p-1" aria-label="Menu" onClick={() => setMenuOpen(true)}>
+              <HamburgerMenuIcon />
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Museum pins — always visible */}
-        {(activeFilter === null || activeFilter === "museums") &&
-          MUSEUMS.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => onPinClick(m)}
-              className="absolute -translate-x-1/2 -translate-y-1/2 group"
-              style={{ top: m.top, left: m.left }}
-            >
-              <div className="w-8 h-8 rounded-full bg-[#58744A] border-2 border-white flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 group-active:scale-95">
-                <span className="text-white text-[11px] font-bold" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  {m.id}
-                </span>
-              </div>
+      {/* Filter pill row */}
+      <div className="relative shrink-0 w-full">
+        <div className="overflow-hidden size-full">
+          <div className="flex gap-2 items-center px-4 overflow-x-auto size-full" style={{ paddingTop: 10, paddingBottom: 10 }}>
+            {(["museums", "parks", "bikes", "handicap", "cafes"] as FilterKey[]).map((key) => {
+              const labels: Record<FilterKey, string> = { museums: "🏛️ Museums", parks: "🌳 Parks", bikes: "🚲 Bike-parking", handicap: "🚻 Toilet", cafes: "☕ Cafés" };
+              return (
+                <button
+                  key={key}
+                  onClick={() => toggle(key)}
+                  className="shrink-0"
+                  style={{
+                    ...pillStyle(key),
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 8,
+                    fontFamily: FONT,
+                    fontSize: 12,
+                    fontWeight: 500,
+                    lineHeight: 1,
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {labels[key]}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="absolute inset-0 pointer-events-none" style={{ borderBottom: "0.682px solid rgba(0,0,0,0.05)" }} />
+      </div>
+
+      {/* Map — exact 312px tall, full width, pins at Figma pixel positions */}
+      <div className="relative shrink-0 w-full" style={{ height: 311.993 }}>
+        <img alt="Parkmuseerne district map" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={districtMap} />
+
+        {/* You are here (Container4 in Figma at left=173.29, top=167.83) */}
+        <div className="absolute" style={{ left: 173.29, top: 167.83 }}>
+          <span className="relative flex" style={{ width: 20, height: 20 }}>
+            <span className="animate-ping absolute inline-flex size-full rounded-full bg-blue-400 opacity-75" />
+            <span className="relative inline-flex rounded-full size-full bg-blue-500 border-2 border-white shadow-md" />
+          </span>
+        </div>
+
+        {showMuseumPins &&
+          MUSEUMS_LIST.map((m) => (
+            <button key={m.id} onClick={() => onPinClick(m)} className="absolute flex items-center justify-center" style={{ left: m.mapLeft, top: m.mapTop, width: 32, height: 32 }}>
+              <GreenPin num={m.id} />
             </button>
           ))}
 
-        {/* Café markers — only when filter active */}
-        {activeFilter === "cafes" &&
-          CAFES.map((c, i) => (
-            <div
-              key={i}
-              className="absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7 bg-[#E9672B] rounded-full border-2 border-white flex items-center justify-center shadow-md text-sm"
-              style={{ top: c.top, left: c.left }}
-            >
-              ☕
-            </div>
-          ))}
-
-        {/* WC markers — only when filter active */}
-        {activeFilter === "wc" &&
-          WCS.map((w, i) => (
-            <div
-              key={i}
-              className="absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7 bg-[#E9672B] rounded-full border-2 border-white flex items-center justify-center shadow-md text-sm"
-              style={{ top: w.top, left: w.left }}
-            >
-              🚻
-            </div>
+        {showParkPins &&
+          PARKS_LIST.map((m) => (
+            <button key={m.id} onClick={() => onPinClick(m)} className="absolute flex items-center justify-center" style={{ left: m.mapLeft, top: m.mapTop, width: 32, height: 32 }}>
+              <GreenPin num={m.id} />
+            </button>
           ))}
       </div>
 
-      {/* Vertical text list */}
-      <div className="flex-shrink-0 px-4 py-4 bg-[#FCF5EC] border-t border-black/8">
-        <p
-          className="text-[10px] font-semibold text-black/35 uppercase tracking-widest mb-3"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          Locations
-        </p>
-        <div className="flex flex-col">
-          {MUSEUMS.map((m, i) => (
-            <button
-              key={m.id}
-              onClick={() => onPinClick(m)}
-              className={`flex items-center gap-3 py-3 text-left ${
-                i < MUSEUMS.length - 1 ? "border-b border-black/8" : ""
-              } hover:bg-black/3 -mx-1 px-1 rounded-lg transition-colors`}
-            >
-              <span className="w-6 h-6 rounded-full bg-[#58744A] flex items-center justify-center flex-shrink-0">
-                <span className="text-white text-[10px] font-bold" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  {m.id}
-                </span>
-              </span>
-              <span
-                className="text-black font-semibold text-sm"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
-                {m.name}
-              </span>
-            </button>
-          ))}
+      {/* Directory — Museums */}
+      <div className="bg-[#fcf5ec] relative shrink-0 w-full" style={{ borderTop: "0.682px solid rgba(0,0,0,0.08)" }}>
+        <div className="flex flex-col items-start px-4" style={{ paddingTop: 20.682, paddingBottom: 16 }}>
+          <div style={{ height: 24.004, position: "relative", marginBottom: 12 }}>
+            <p className="absolute left-0 text-black whitespace-nowrap" style={{ fontFamily: HEADING_FONT, fontSize: 16, fontWeight: 700, lineHeight: "24px", top: -0.95 }}>
+              Museums
+            </p>
+          </div>
+          <div className="flex flex-col items-start w-full" style={{ paddingTop: 12 }}>
+            {MUSEUMS_LIST.map((m, i) => (
+              <div key={m.id} className="relative shrink-0 w-full" style={{ height: i < MUSEUMS_LIST.length - 1 ? 52.682 : 52 }}>
+                <button onClick={() => onPinClick(m)} className="absolute flex gap-3 items-center rounded-[10px] hover:bg-black/3 transition-colors" style={{ left: -4, top: 0, width: 366, paddingLeft: 4, paddingRight: 4, paddingTop: 12, paddingBottom: i < MUSEUMS_LIST.length - 1 ? 12.682 : 12 }}>
+                  {i < MUSEUMS_LIST.length - 1 && <div className="absolute inset-0 rounded-[10px] pointer-events-none" style={{ borderBottom: "0.682px solid rgba(0,0,0,0.08)" }} />}
+                  <SmallGreenPin num={m.id} />
+                  <span className="text-black whitespace-nowrap" style={{ fontFamily: FONT, fontSize: 14, fontWeight: 600, lineHeight: "20px" }}>
+                    {m.name}
+                  </span>
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
+      {/* Directory — Parks */}
+      <div className="bg-[#fcf5ec] relative shrink-0 w-full" style={{ borderTop: "0.682px solid rgba(0,0,0,0.08)" }}>
+        <div className="flex flex-col items-start px-4" style={{ paddingTop: 20.682, paddingBottom: 24 }}>
+          <div style={{ height: 24.004, position: "relative", marginBottom: 12 }}>
+            <p className="absolute left-0 text-black whitespace-nowrap" style={{ fontFamily: HEADING_FONT, fontSize: 16, fontWeight: 700, lineHeight: "24px", top: -0.95 }}>
+              Parks
+            </p>
+          </div>
+          <div className="flex flex-col items-start w-full" style={{ paddingTop: 12 }}>
+            {PARKS_LIST.map((m, i) => (
+              <div key={m.id} className="relative shrink-0 w-full" style={{ height: i < PARKS_LIST.length - 1 ? 52.682 : 52 }}>
+                <button onClick={() => onPinClick(m)} className="absolute flex gap-3 items-center rounded-[10px] hover:bg-black/3 transition-colors" style={{ left: -4, top: 0, width: 366, paddingLeft: 4, paddingRight: 4, paddingTop: 12, paddingBottom: i < PARKS_LIST.length - 1 ? 12.682 : 12 }}>
+                  {i < PARKS_LIST.length - 1 && <div className="absolute inset-0 rounded-[10px] pointer-events-none" style={{ borderBottom: "0.682px solid rgba(0,0,0,0.08)" }} />}
+                  <SmallGreenPin num={m.id} />
+                  <span className="text-black whitespace-nowrap" style={{ fontFamily: FONT, fontSize: 14, fontWeight: 600, lineHeight: "20px" }}>
+                    {m.name}
+                  </span>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="bg-[#1a1a1a] relative shrink-0 w-full">
+        <div className="flex flex-col items-start p-4">
+          <p className="text-center w-full" style={{ fontFamily: FONT, fontSize: 10, fontWeight: 400, lineHeight: "16.25px", color: "rgba(255,255,255,0.8)" }}>
+            Parkmuseerne | c/o Statens Museum for Kunst • Sølvgade 48-50 • 1307 København K
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

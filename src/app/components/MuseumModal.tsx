@@ -25,16 +25,16 @@ export function MuseumModal({ museum, onClose, onBotanical }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/40 z-20"
+            className="fixed inset-0 bg-black/40 z-20"
           />
 
-          {/* Bottom sheet */}
+          {/* Bottom sheet — fixed to viewport, constrained to mobile width */}
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
-            className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl z-30 overflow-hidden shadow-2xl"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] bg-white rounded-t-2xl z-30 overflow-hidden shadow-2xl"
           >
             {/* Drag handle */}
             <div className="flex justify-center pt-3 pb-1">
@@ -62,7 +62,7 @@ export function MuseumModal({ museum, onClose, onBotanical }: Props) {
               {/* Museum name */}
               <h2
                 className="text-black text-2xl font-black leading-tight mb-3"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                style={{ fontFamily: "'Montagu Slab', serif" }}
               >
                 {museum.name}
               </h2>
@@ -70,13 +70,13 @@ export function MuseumModal({ museum, onClose, onBotanical }: Props) {
               {/* Description */}
               <p
                 className="text-gray-600 text-sm leading-relaxed mb-1"
-                style={{ fontFamily: "'Inter', sans-serif" }}
+                style={{ fontFamily: "'Source Serif 4', serif" }}
               >
                 An extraordinary collection spanning art and cultural heritage in the heart of Copenhagen's museum district.
               </p>
               <p
                 className="text-gray-600 text-sm leading-relaxed mb-4"
-                style={{ fontFamily: "'Inter', sans-serif" }}
+                style={{ fontFamily: "'Source Serif 4', serif" }}
               >
                 Permanent exhibitions alongside rotating international displays — something new every visit.
               </p>
@@ -87,7 +87,7 @@ export function MuseumModal({ museum, onClose, onBotanical }: Props) {
                   <Clock size={12} className="text-[#58744A]" />
                   <span
                     className="text-xs font-medium text-black"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    style={{ fontFamily: "'Source Serif 4', serif" }}
                   >
                     Opening Hours: 10–17
                   </span>
@@ -96,7 +96,7 @@ export function MuseumModal({ museum, onClose, onBotanical }: Props) {
                   <MapPin size={12} className="text-[#58744A]" />
                   <span
                     className="text-xs font-medium text-black"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    style={{ fontFamily: "'Source Serif 4', serif" }}
                   >
                     4 min walk
                   </span>
@@ -107,14 +107,14 @@ export function MuseumModal({ museum, onClose, onBotanical }: Props) {
               <div className="flex gap-3 mb-4">
                 <button
                   className="flex-1 border-2 border-[#58744A] text-[#58744A] py-3 font-semibold text-sm flex items-center justify-center gap-2 rounded-sm transition-colors hover:bg-[#58744A]/5"
-                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  style={{ fontFamily: "'Source Serif 4', serif" }}
                 >
                   <Navigation size={15} />
                   Get directions
                 </button>
                 <button
                   className="flex-1 bg-[#E9672B] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 rounded-sm transition-opacity hover:opacity-90 shadow-md"
-                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  style={{ fontFamily: "'Source Serif 4', serif" }}
                 >
                   Buy ticket
                 </button>
@@ -124,7 +124,7 @@ export function MuseumModal({ museum, onClose, onBotanical }: Props) {
               <div className="flex justify-center">
                 <button
                   className="flex items-center gap-1.5 text-[#58744A] text-sm font-medium underline underline-offset-2"
-                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  style={{ fontFamily: "'Source Serif 4', serif" }}
                 >
                   See current exhibitions
                   <ExternalLink size={13} />

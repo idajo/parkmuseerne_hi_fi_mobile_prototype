@@ -1,27 +1,13 @@
 import { useState } from "react";
-import { ArrowLeft, X } from "lucide-react";
-import { HamburgerIcon } from "./HamburgerIcon";
-import botanicalHero from "../../imports/botanical_garden.png";
-import parkLogo from "../../imports/Parkmuseerne/c558da41746efd85c313bcad2c6f96deba71a7c7.png";
-// BotanicalGarden-2 Figma assets
-import imgImage6 from "../../imports/BotanicalGarden-2/9bd4adf7c1416ac6fa75aaec9295e4e84460e0c5.png";
-import imgImage7 from "../../imports/BotanicalGarden-2/00be8eb58c40740372a789bb1175fca39a7b1432.png";
+import { X } from "lucide-react";
+import svgPaths from "../../imports/ParkmuseerneHiFiMobilePrototype-2/svg-hyhthya7sp";
+import imgImageBotanicalGarden from "../../imports/ParkmuseerneHiFiMobilePrototype-2/cf170c0c95d371603d644b97bcbec9fe2de94af4.png";
+import imgImage1 from "../../imports/image.png";
+import parkLogo from "../../imports/ParkmuseerneHiFiMobilePrototype/c558da41746efd85c313bcad2c6f96deba71a7c7.png";
 
-// The Figma frame is 393×1688px.
-// imgImage6 covers y=0–1688 (full design screenshot).
-// imgImage7 covers y=882–1688 (bottom half reinforcement, rendered at 209.43% h / -109.43% top).
-// We crop out the dark museum header (y=0–411) and replace it with our own
-// header + hero image. Content shown from y=411 onwards.
-//
-// At rendered width ≈390px (scale 390/393 ≈ 0.9924):
-//   Crop offset  : 411 × 0.9924 ≈ 408px  (marginTop on imgImage6)
-//   Content height: (1688−411) × 0.9924 ≈ 1267px
-//   imgImage7 starts at (882−411) × 0.9924 ≈ 467px from content top
+const FONT = "'Source Serif 4', serif";
 
-const CONTENT_HEIGHT = 1267;
-const IMG6_CROP     = -408;   // negative marginTop to skip the header area
-const IMG7_TOP      =  467;   // px from content top where imgImage7 overlay begins
-const IMG7_HEIGHT   =  799;   // (806 × 0.9924)
+const HERO_H = 199.994;
 
 const NAV_LINKS = [
   "Explore the area", "Museums", "Parks & Gardens",
@@ -32,29 +18,33 @@ interface Props {
   onBack: () => void;
 }
 
+function LanguageSelector() {
+  return (
+    <p className="tracking-[0.275px] whitespace-nowrap" style={{ fontFamily: FONT, fontSize: 11, color: "rgba(0,0,0,0.5)" }}>
+      <span style={{ fontSize: 11, lineHeight: "16.5px" }}>DA</span>
+      <span style={{ fontSize: 11, lineHeight: "16.5px", color: "rgba(0,0,0,0.3)" }}>|</span>
+      <span style={{ fontSize: 11, lineHeight: "16.5px", color: "#000", fontWeight: 700 }}>EN</span>
+    </p>
+  );
+}
+
+function HamburgerMenuIcon() {
+  return (
+    <div className="flex flex-col gap-[5px]" style={{ width: 28 }}>
+      <div className="bg-[#58744a] rounded-[6px]" style={{ height: 2.994, width: 18.198 }} />
+      <div className="bg-[#58744a] rounded-[6px]" style={{ height: 2.994, width: 28 }} />
+      <div className="bg-[#58744a] rounded-[6px]" style={{ height: 2.994, width: 11.752 }} />
+    </div>
+  );
+}
+
 export function BotanicalGardenScreen({ onBack }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FCF5EC] relative">
+    <div className="flex flex-col bg-[#fcf5ec] relative" style={{ minHeight: 852.354 }}>
 
-      {/* ── App header (sticky) ── */}
-      <header className="flex items-center justify-between px-4 py-3 bg-[#FCF5EC] flex-shrink-0 border-b border-black/8 sticky top-0 z-20">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 text-black"
-        >
-          <ArrowLeft size={18} />
-          <span className="text-sm font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>
-            Back to Map
-          </span>
-        </button>
-        <button className="p-1" aria-label="Open menu" onClick={() => setMenuOpen(true)}>
-          <HamburgerIcon />
-        </button>
-      </header>
-
-      {/* ── Slide-in menu ── */}
+      {/* Slide-in menu */}
       {menuOpen && (
         <div className="absolute inset-0 z-50 flex">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMenuOpen(false)} />
@@ -70,86 +60,74 @@ export function BotanicalGardenScreen({ onBack }: Props) {
                 <button
                   key={link}
                   onClick={() => setMenuOpen(false)}
-                  className={`text-left py-3 border-b border-[#58744A]/10 font-medium text-[15px] hover:text-[#58744A] ${
-                    link === "Køb billet" ? "text-[#E9672B] font-semibold" : "text-black"
+                  className={`text-left py-3 border-b border-[#58744A]/10 text-[15px] hover:text-[#58744A] ${
+                    link === "Køb billet" ? "text-[#E9672B] font-semibold" : "text-black font-medium"
                   }`}
-                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  style={{ fontFamily: FONT }}
                 >
                   {link}
                 </button>
               ))}
             </nav>
             <div className="px-5 py-6">
-              <p className="text-xs text-[#58744A]/60" style={{ fontFamily: "'Inter', sans-serif" }}>
-                © 2024 Parkmuseerne
-              </p>
+              <p className="text-xs text-[#58744A]/60" style={{ fontFamily: FONT }}>© 2024 Parkmuseerne</p>
             </div>
           </div>
         </div>
       )}
 
-      {/* ── Hero photo (replaces dark museum header) ── */}
-      <div className="w-full flex-shrink-0 overflow-hidden" style={{ height: 200 }}>
-        <img src={botanicalHero} alt="Botanical Garden" className="w-full h-full object-cover" />
-      </div>
-
-      {/* ── Figma design content (y=411 → 1688) ── */}
-      {/* Outer clip container, exact height of visible content */}
+      {/* Header — sticky, absolute in Figma */}
       <div
-        className="relative w-full flex-shrink-0 overflow-hidden"
-        style={{ height: CONTENT_HEIGHT }}
+        className="bg-[#fcf5ec] sticky top-0 z-20 w-full shrink-0"
+        style={{ borderBottom: "0.682px solid rgba(0,0,0,0.08)" }}
       >
-        {/* imgImage6 — full 1688px design, shifted up so y=411 aligns to top */}
-        <img
-          src={imgImage6}
-          alt=""
-          style={{
-            position: "absolute",
-            top: IMG6_CROP,
-            left: 0,
-            width: "100%",
-            height: "auto",
-            display: "block",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* imgImage7 — Figma places this at y=882, rendered at 209.43% h / -109.43% top */}
-        {/* In our cropped view it starts at IMG7_TOP px from the top */}
-        <div
-          style={{
-            position: "absolute",
-            top: IMG7_TOP,
-            left: 0,
-            right: 0,
-            height: IMG7_HEIGHT,
-            overflow: "hidden",
-            pointerEvents: "none",
-          }}
-        >
-          <img
-            src={imgImage7}
-            alt=""
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "209.43%",
-              top: "-109.43%",
-              left: 0,
-            }}
-          />
+        <div className="flex items-center justify-between px-4" style={{ paddingTop: 12, paddingBottom: 12.682 }}>
+          {/* Back to Map button */}
+          <button onClick={onBack} className="flex items-center gap-2">
+            <svg width={17.995} height={17.995} viewBox="0 0 17.9953 17.9953" fill="none">
+              <path d={svgPaths.p1c94b100} stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.49961" />
+              <path d="M14.2463 8.99765H3.74902" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.49961" />
+            </svg>
+            <span className="text-black" style={{ fontFamily: FONT, fontSize: 14, fontWeight: 600, lineHeight: "20px" }}>Back to Map</span>
+          </button>
+          {/* Right side: DA|EN + hamburger */}
+          <div className="flex items-center gap-3">
+            <LanguageSelector />
+            <button className="p-1" aria-label="Menu" onClick={() => setMenuOpen(true)}>
+              <HamburgerMenuIcon />
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Spacer matching Figma's PlaceholderForBotanicalGardenScreen (header area in the static layout) */}
+      {/* Not needed since header is now sticky in DOM flow */}
+
+      {/* Botanical garden hero image */}
+      <div className="relative shrink-0 w-full overflow-hidden" style={{ height: HERO_H }}>
+        <img
+          alt="Botanical Garden"
+          className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+          src={imgImageBotanicalGarden}
+        />
+      </div>
+
+      {/* Content image — full width, natural height */}
+      <img src={imgImage1} alt="Botanical Garden map and information" className="w-full block" />
+
       {/* Footer */}
-      <div className="w-full bg-[#EDE8DF] border-t border-black/8 px-4 py-5">
-        <p
-          className="text-center text-[11px] text-black/55 leading-relaxed"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          Parkmuseerne | c/o Statens Museum for Kunst{"\n"}
-          Sølvgade 48-50 • 1307 København K
-        </p>
+      <div
+        className="bg-[#ede8df] relative shrink-0 w-full"
+        style={{ borderTop: "0.682px solid rgba(0,0,0,0.08)" }}
+      >
+        <div className="flex flex-col items-start px-4" style={{ paddingTop: 20.682, paddingBottom: 20 }}>
+          <p
+            className="text-center w-full"
+            style={{ fontFamily: FONT, fontSize: 11, fontWeight: 400, lineHeight: "17.875px", color: "rgba(0,0,0,0.55)" }}
+          >
+            Parkmuseerne | c/o Statens Museum for Kunst Sølvgade 48-50 • 1307 København K
+          </p>
+        </div>
       </div>
 
     </div>
