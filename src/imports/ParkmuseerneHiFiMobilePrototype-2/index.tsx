@@ -1,7 +1,7 @@
 import svgPaths from "./svg-hyhthya7sp";
-import imgImageBotanicalGarden from "./cf170c0c95d371603d644b97bcbec9fe2de94af4.png";
-import imgImage from "./9bd4adf7c1416ac6fa75aaec9295e4e84460e0c5.png";
-import imgImage1 from "./00be8eb58c40740372a789bb1175fca39a7b1432.png";
+import imgImageBotanicalGarden from "./cf170c0c95d371603d644b97bcbec9fe2de94af4.webp";
+import imgImage from "./9bd4adf7c1416ac6fa75aaec9295e4e84460e0c5.webp";
+import imgImage1 from "./00be8eb58c40740372a789bb1175fca39a7b1432.webp";
 
 function PlaceholderForBotanicalGardenScreen() {
   return <div className="h-[51.642px] relative shrink-0 w-[389.994px]" data-name="Placeholder for BotanicalGardenScreen" />;

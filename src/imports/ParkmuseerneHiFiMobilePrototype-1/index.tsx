@@ -1,5 +1,5 @@
-import imgImageParkmuseerne from "./c558da41746efd85c313bcad2c6f96deba71a7c7.png";
-import imgImageParkmuseerneParkAlley from "./b77c9a85cc3672710566fceeac353d600e075c0a.png";
+import imgImageParkmuseerne from "./c558da41746efd85c313bcad2c6f96deba71a7c7.webp";
+import imgImageParkmuseerneParkAlley from "./b77c9a85cc3672710566fceeac353d600e075c0a.webp";
 
 function ImageParkmuseerne() {
   return (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import parkLogo from "../../imports/ParkmuseerneHiFiMobilePrototype-1/c558da41746efd85c313bcad2c6f96deba71a7c7.png";
-import heroImage from "../../imports/ParkmuseerneHiFiMobilePrototype-1/b77c9a85cc3672710566fceeac353d600e075c0a.png";
+import parkLogo from "../../imports/ParkmuseerneHiFiMobilePrototype-1/c558da41746efd85c313bcad2c6f96deba71a7c7.webp";
+import heroImage from "../../imports/ParkmuseerneHiFiMobilePrototype-1/b77c9a85cc3672710566fceeac353d600e075c0a.webp";
 
 interface Props {
   onExplore: () => void;

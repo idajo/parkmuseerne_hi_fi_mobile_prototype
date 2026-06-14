@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 
-const districtMap = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/ad518c9bc1f134e0c56a7bd2d9e600fe66ecde02.png", import.meta.url).href;
-const parkLogo = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/c558da41746efd85c313bcad2c6f96deba71a7c7.png", import.meta.url).href;
-const hirschsprungImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/thehirschsprungcollection.jpg", import.meta.url).href;
-const smkImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/smk.jpg", import.meta.url).href;
+const districtMap = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/ad518c9bc1f134e0c56a7bd2d9e600fe66ecde02.webp", import.meta.url).href;
+const parkLogo = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/c558da41746efd85c313bcad2c6f96deba71a7c7.webp", import.meta.url).href;
+const hirschsprungImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/thehirschsprungcollection.webp", import.meta.url).href;
+const smkImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/smk.webp", import.meta.url).href;
 const naturalHistoryImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/naturalhistorymuseum.webp", import.meta.url).href;
-const rosenborgImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/rosenborgcastle.JPG", import.meta.url).href;
-const workersMuseumImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/workersmuseum.jpg", import.meta.url).href;
-const davidCollectionImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/davidcollection.jpg", import.meta.url).href;
+const rosenborgImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/rosenborgcastle.webp", import.meta.url).href;
+const workersMuseumImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/workersmuseum.webp", import.meta.url).href;
+const davidCollectionImage = new URL("../../imports/ParkmuseerneHiFiMobilePrototype/davidcollection.webp", import.meta.url).href;
 
 const FONT = "'Source Serif 4', serif";
 const HEADING_FONT = "'Montagu Slab', serif";

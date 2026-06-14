@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import svgPaths from "../../imports/ParkmuseerneHiFiMobilePrototype-2/svg-hyhthya7sp";
-import imgImageBotanicalGarden from "../../imports/ParkmuseerneHiFiMobilePrototype-2/cf170c0c95d371603d644b97bcbec9fe2de94af4.png";
-import imgImage1 from "../../imports/image.png";
-import parkLogo from "../../imports/ParkmuseerneHiFiMobilePrototype/c558da41746efd85c313bcad2c6f96deba71a7c7.png";
+import imgImageBotanicalGarden from "../../imports/ParkmuseerneHiFiMobilePrototype-2/cf170c0c95d371603d644b97bcbec9fe2de94af4.webp";
+import imgImage1 from "../../imports/image.webp";
+import parkLogo from "../../imports/ParkmuseerneHiFiMobilePrototype/c558da41746efd85c313bcad2c6f96deba71a7c7.webp";
 
 const FONT = "'Source Serif 4', serif";
 
